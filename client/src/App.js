@@ -1,7 +1,16 @@
+import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import UserRouter from "./routes/UserRouter";
+
 function App() {
-  return <div className="text-5xl">
-    <h1>Hello world</h1>
-  </div>;
+  return (
+    <div className="font_roboto">
+      <Router>
+        <Routes>
+          <Route path="/*" element={<UserRouter />}></Route>
+        </Routes>
+      </Router>
+    </div>
+  );
 }
 
 export default App;
