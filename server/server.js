@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const helmet = require("helmet")
 const Configs = require("./utils/constants");
+const cors = require('cors');
 require("./database/connection");
 const errorHandler = require("./utils/middleware/errorHandlng")
 
@@ -23,6 +24,7 @@ const server = http.createServer(app);
 //using global middlewares
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 app.use(helmet())
 app.use(morgan("dev"));
 app.use(express.urlencoded({extended: true}));
