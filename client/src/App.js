@@ -7,6 +7,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/*" element={<UserRouter />}></Route>
+          {/* <Route path="/admin" element={<AdminRouter/>}></Route> */}
         </Routes>
       </Router>
     </div>

@@ -22,8 +22,8 @@ const server = http.createServer(app);
 
 
 //using global middlewares
-app.use(express.json());
 app.use(cookieParser());
+app.use(express.json());
 app.use(cors());
 app.use(helmet())
 app.use(morgan("dev"));

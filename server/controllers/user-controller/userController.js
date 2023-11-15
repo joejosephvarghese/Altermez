@@ -4,11 +4,12 @@ const HttpStatusCodes = require("../../utils/httpStatusCodes");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../../database/models/userModel");
+const Configs = require("../../utils/constants");
 
 //user Signup
 
 const handleUserSignup = asyncHandler(async (req, res, next) => {
-  console.log(req.body);
+  console.log(req.headers);
   const { fname, email, password } = req.body;
   if ((!fname, !email, !password)) {
     const error = new AppError(
@@ -46,23 +47,40 @@ const handleUserSignup = asyncHandler(async (req, res, next) => {
 });
 
 
-
-//user Login
-
-
 const handleUserLogin = asyncHandler(async (req, res, next) => {
-  console.log(req.body);
+  const {email, password} = req.body;
+  console.log(email, password )
+  const user = await User.findOne({email});
+  if(!user) {
+     const err = new AppError("Invalid Credentals", HttpStatusCodes.UNAUTHORIZED);
+     return next(err);
+  }
 
-  const error = new AppError(
-    "Somthing went wrong",
-    HttpStatusCodes.BAD_REQUEST
-  );
-  next(error);
+ const isCorrect = await bcrypt.compare(password, user.password);
+ console.log(isCorrect)
+ if(isCorrect){
+   const payload = {id: user._id}
+   const token = jwt.sign(payload, Configs.JWT_SECRET);
+   return res.status(HttpStatusCodes.OK).json({status: "success", message:"User has been verified", token})
+ }
+ const err = new AppError("Invalid Credentials", HttpStatusCodes.UNAUTHORIZED);
+ return next(err);
 });
 
 const handleVerifyUser = asyncHandler(async (req, res, next) => {
-  console.log(req.body);
+  if(req.headers["authorization"]){
+    const token = req.headers["authorization"].split(" ")[1]
+    console.log(token)
+    jwt.verify(token, Configs.JWT_SECRET, (error, decoded) => {
+      if(error){
+        const err = new AppError(error.message, HttpStatusCodes.UNAUTHORIZED)
+        next(err)
+      }
+    });
+    console.log(isVerify)
+  }
 });
+
 
 module.exports = {
   handleUserSignup,

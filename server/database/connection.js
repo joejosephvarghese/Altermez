@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Configs = require("../utils/constants");
+const Configs = require("../utils/constants")
 
 const MONGO_DB_URI = Configs.MONGO_DB_URI;
 mongoose.connect(MONGO_DB_URI);
