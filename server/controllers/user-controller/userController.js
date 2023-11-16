@@ -9,9 +9,13 @@ const Configs = require("../../utils/constants");
 //user Signup
 
 const handleUserSignup = asyncHandler(async (req, res, next) => {
-  console.log(req.headers);
-  const { fname, email, password } = req.body;
-  if ((!fname, !email, !password)) {
+  // console.log(req.headers);
+  console.log(req.body,"odkdf");
+  const { name, email, password } = req.body;
+
+ 
+  if ((!name, !email, !password)) {
+  
     const error = new AppError(
       "Please enter the all the values",
       HttpStatusCodes.BAD_REQUEST
@@ -30,16 +34,16 @@ const handleUserSignup = asyncHandler(async (req, res, next) => {
   }
 
   const newUser = new User({
-    fname,
+    name,
     email,
     password,
   });
-
+console.log(newUser,"ff");
   await newUser.save();
 
   res.status(HttpStatusCodes.SUCCESS).json({
     _id: newUser?._id,
-    fname: newUser?.fname,
+    name: newUser?.name,
     email: newUser?.email,
     pic: newUser?.pic,
     message: "user registered sucessfully",

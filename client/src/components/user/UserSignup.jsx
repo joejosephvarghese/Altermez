@@ -107,9 +107,9 @@ export default function UserSignupForm() {
                 {...register("password")}
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-purple-500"
               />
-              {errors.password && (
+              {errors.confirmPassword && (
                 <p className="text-red-500 text-sm">
-                  {errors.password.message}
+                  {errors.confirmPassword.message}
                 </p>
               )}
             </div>
