@@ -1,14 +1,24 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { Toaster, toast } from "sonner";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate,Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux/es/exports";
 import { userLoginValidationSchema } from "../../utils/validation";
+import { setToken } from "../../features/redux/slice/user/TokenSlice";
+import { loginSuccess } from "../../features/redux/slice/user/UserLoginAuthSlice";
+import { userLogin } from "../../features/axios/api/user/userAuthentication";
+
 
 
 
 
   const UserLoginForm =()=>{
 
+    const dispatch=useDispatch();
+    const navigate=useNavigate();
+    const token = localStorage.getItem('token');
+    const isLoggedIn = useSelector((state) => state.userAuth.isLoggedIn);
     
     const {
       register,
@@ -18,9 +28,34 @@ import { userLoginValidationSchema } from "../../utils/validation";
       resolver: yupResolver(userLoginValidationSchema),
     });
 
+    useEffect(()=>{
+      if(token) {
+        dispatch(loginSuccess());
+      }
+      if(isLoggedIn === true) {
+        navigate('/user/home');
+      }
+    },[navigate]);
+
+    const notify = (msg, type) =>
+    type === "error" ? toast.error(msg) : toast.success(msg);
+
     const submitHandler = async (formData) => {
         console.log(formData);
+        userLogin(formData)
+        .then((response)=>{
+          const token =response.token
+          dispatch(setToken());
+          dispatch(loginSuccess())
 
+          notify("Login success", "success");
+          setTimeout(() => {
+            navigate('/user/home');
+          }, 2000);
+        })
+        .catch((error) => {
+          notify(error.message, "error");
+        });
       }
 
 
@@ -91,7 +126,7 @@ import { userLoginValidationSchema } from "../../utils/validation";
         </div>
       </div>
     </div>
-     
+    <Toaster richColors />
   </div>
 );
 }

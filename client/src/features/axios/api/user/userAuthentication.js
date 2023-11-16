@@ -20,4 +20,24 @@ export const registerUser = async (payload)=>{
             throw new Error("Signup failed, try again");
           }
     }
+};
+
+
+export const userLogin = async (payload)=>{
+ try {
+  const config={
+    url:`${apiConfig.userLogin}`,
+    method:"post",
+    data:payload
+  };
+  const response= await axios(config);
+  return response.data;
+  
+ } catch (error) {
+  if (error.message === "Request failed with status code 401") {
+    throw new Error("Incorrect email or password !!!");
+ }else {
+  throw new Error("Login failed, try again");
 }
+ }
+};
