@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
 import AdminLoginPage from "../pages/Admin/AdminLoginPage";
+import AdminHomepage from "../pages/Admin/AdminHomePage";
 
 const AdminRouter = ()=>{
    
@@ -8,7 +9,7 @@ const AdminRouter = ()=>{
         <div>
         <Routes>
           <Route path="login" element={<AdminLoginPage />} />
-          {/* <Route path="homepage" element={<AdminHomePage/>}/> */}
+          <Route path="" element={<AdminHomepage/>}/>
           
         </Routes>
       </div>

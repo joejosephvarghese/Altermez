@@ -11,6 +11,8 @@ const errorHandler = require("./utils/middleware/errorHandlng")
 
 //requiring routes
 const userRoute = require("./routes/userRoutes");
+const companyRoute = require("./routes/companyRoute")
+
 const AppError = require("./utils/error-class/AppError");
 const HttpStatusCodes = require("./utils/httpStatusCodes");
 
@@ -31,6 +33,7 @@ app.use(express.urlencoded({extended: true}));
 
 
 app.use("/api/v1/auth", userRoute);
+app.use("/api/v1/company", companyRoute)
 
 
 
