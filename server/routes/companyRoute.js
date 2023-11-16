@@ -1,10 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const {handleAddingAndUpdateingCompany} = require("../controllers/company-controller/companyController");
+const {
+  handleGetCompanies,
+  handleSoftDeleteCompany,
+  handleCompleteDelete,
+  handleAddCompany,
+  handleUpdateCompany,
+} = require("../controllers/company-controller/companyController");
 
+router.route("/")
+    .get(handleGetCompanies)
+    .post(handleAddCompany)
+    .put(handleUpdateCompany)
+    .patch(handleSoftDeleteCompany)
+    .delete(handleCompleteDelete);
 
-router.route("/").post(handleAddingAndUpdateingCompany);
-
-
-
-module.exports = router
+module.exports = router;

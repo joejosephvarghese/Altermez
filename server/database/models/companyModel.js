@@ -30,6 +30,10 @@ const companySchema = mongoose.Schema({
     },
     remarks:{
         type: String,
+    },
+    deleted: {
+        type: Boolean,
+        default: false
     }
 },
 {
