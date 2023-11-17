@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, Typography } from "@material-tailwind/react";
 import { handleFetchingCompanies } from "../../features/redux/slice/admin/companySlice";
+import { Link } from "react-router-dom";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 const ListCompaniTable = () => {
   const dispatch = useDispatch();
   const companies = useSelector((s) => s.companies.data);
   const [page, setPage] = useState(1);
+  
+  
 
   const itemsPerPage = 5; // Adjust as needed
   const totalItems = 10; // Replace with the actual total number of items
@@ -16,6 +20,12 @@ const ListCompaniTable = () => {
   const handlePageChange = (page) => {
     setPage(page);
   };
+
+
+ 
+
+
+
 
   React.useEffect(() => {
     dispatch(handleFetchingCompanies({ page, limit: itemsPerPage }));
@@ -46,21 +56,22 @@ const ListCompaniTable = () => {
     );
   };
 
-  const handleAddCompany = () => {
-    // Add logic to show a modal or navigate to the page with the form for adding a new company
-    console.log("Add Company clicked!");
-  };
+ 
 
   return (
     <div className="container mx-auto mt-8">
       <div className="flex justify-between mb-4">
         {/* <h1 className="text-2xl font-bold">Company List</h1> */}
+        <Link to={"/admin/postjob"}>
         <button
-          className="bg-green-500 text-white px-4 py-2 rounded "
-          onClick={handleAddCompany}
+          type="button"
+          className="inline-flex items-center rounded-md bg-brown-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-brown-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-          Add Company
+          <PlusIcon className="-ml-0.5 mr-1.5 h-5 w-5" aria-hidden="true" />
+          Post Job
         </button>
+      </Link>
+
       </div>
 
       <table className="min-w-full bg-white border border-gray-300">
@@ -97,10 +108,15 @@ const ListCompaniTable = () => {
           ))}
         </tbody>
       </table>
-
+ 
       <div className="mt-4 flex justify-center">
         {renderPaginationButtons()}
       </div>
+
+
+
+
+     
     </div>
   );
 };

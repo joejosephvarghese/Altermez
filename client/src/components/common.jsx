@@ -1,6 +1,6 @@
 import React from "react";
 
-const PageTitle = ({ title }) => {
+export const PageTitle = ({ title }) => {
   return (
    
       <div className="flex items-center my-2 mb-5 justify-around h-16 lg:w-[30rem] w-full  md:w-1/2 rounded bg-gray-50 dark:bg-gray-800">
@@ -11,5 +11,3 @@ const PageTitle = ({ title }) => {
    
   );
 };
-
-export default PageTitle;

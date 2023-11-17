@@ -1,7 +1,7 @@
 import React from "react";
 
 import ListCompaniTable from "../../components/admin/ListCompaniTable";
-import PageTitle from "../../components/common";
+import {PageTitle} from "../../components/common";
 const ListCompaniPage=()=>{
     
 
