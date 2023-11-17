@@ -17,9 +17,10 @@ import { userLogin } from "../../features/axios/api/user/userAuthentication";
 
     const dispatch=useDispatch();
     const navigate=useNavigate();
-    const token = localStorage.getItem('token');
+    const token = useSelector((s)=>s.token.token)
+    console.log(token);
     const isLoggedIn = useSelector((state) => state.userAuth.isLoggedIn);
-    
+    console.log(isLoggedIn);
     const {
       register,
       handleSubmit,
@@ -32,8 +33,9 @@ import { userLogin } from "../../features/axios/api/user/userAuthentication";
       if(token) {
         dispatch(loginSuccess());
       }
-      if(isLoggedIn === true) {
-        navigate('/admin');
+      if(isLoggedIn) {
+        console.log(isLoggedIn);
+        navigate('/');
       }
     },[navigate]);
 
@@ -50,7 +52,7 @@ import { userLogin } from "../../features/axios/api/user/userAuthentication";
 
           notify("Login success", "success");
           setTimeout(() => {
-            navigate('/admin');
+            navigate('/');
           }, 2000);
         })
         .catch((error) => {

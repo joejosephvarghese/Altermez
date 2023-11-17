@@ -1,5 +1,5 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 const AdminHomePageComponent= ()=>{
@@ -14,7 +14,9 @@ const AdminHomePageComponent= ()=>{
         setIsDropdownOpen(!isDropdownOpen);
       };
 
+      useEffect(() =>{
 
+      }, [navigate])
 
     return (
         <>

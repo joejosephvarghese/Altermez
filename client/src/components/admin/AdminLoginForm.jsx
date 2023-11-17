@@ -45,13 +45,14 @@ const AdminLoginForm = () => {
 
   adminLogin(data).then((response)=>{
     const token =response.token
+    console.log(token)
+    setTimeout(() => {
+      navigate('/admin');
+    }, 3000);
     dispatch(adminsetToken(token));
     dispatch(loginSuccess())
 
     notify("Login success", "success");
-    setTimeout(() => {
-      navigate('/admin');
-    }, 2000);
   })
   .catch((error) => {
     notify(error.message, "error");

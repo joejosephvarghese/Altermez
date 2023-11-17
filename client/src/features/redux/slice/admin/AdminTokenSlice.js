@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const loadTokenFromLocalStorage=()=>{
     try {
-        const token=localStorage.getItem('token');
+        const token=localStorage.getItem('adminToken');
         return token ? token : null;
     } catch (error) {
         console.log("error loading token from local storage",error);
@@ -19,13 +19,14 @@ const loadTokenFromLocalStorage=()=>{
 
 
   const  admintokenSlice=createSlice({
-    name:'token',
+    name:'admin_token',
     initialState,
     reducers:{
         adminsetToken: (state, action) => {
             state.token = action.payload;
             try {
-              localStorage.setItem('adminAuth', action.payload);
+              console.log(action.payload)
+              localStorage.setItem('adminToken', action.payload);
             } catch (error) {
               console.log('Error storing token in local storage:', error);
             }

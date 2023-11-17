@@ -1,13 +1,23 @@
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../../features/redux/slice/admin/AdminLoginAuthSlice";
+import { adminclearToken } from "../../features/redux/slice/admin/AdminTokenSlice";
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
+  const handleLogout = () =>{
+    dispatch(logout());
+    setTimeout(() => navigate("login"), 2000);
+    dispatch(adminclearToken());
+  }
 
   return (
     <nav className="w-full bg-white mb-1 mx-2 rounded hover:shadow-sm shadow-xl dark:bg-gray-800 dark:border-gray-700 py-1">
@@ -73,7 +83,7 @@ const Header = () => {
                 <ul className="py-1">
                   <li>
                     <button
-                      onClick
+                      onClick ={handleLogout}
                       className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       role="menuitem"
                     >

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Card, Typography } from "@material-tailwind/react";
 import { handleFetchingCompanies } from "../../features/redux/slice/admin/companySlice";
 import { Link } from "react-router-dom";
 import { PlusIcon } from "@heroicons/react/24/outline";
@@ -12,8 +11,8 @@ const ListCompaniTable = () => {
   
   
 
-  const itemsPerPage = 5; // Adjust as needed
-  const totalItems = 10; // Replace with the actual total number of items
+  const itemsPerPage = 10; // Adjust as needed
+  const totalItems = 20; // Replace with the actual total number of items
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
