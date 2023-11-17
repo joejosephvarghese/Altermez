@@ -33,7 +33,7 @@ import { userLogin } from "../../features/axios/api/user/userAuthentication";
         dispatch(loginSuccess());
       }
       if(isLoggedIn === true) {
-        navigate('/user/home');
+        navigate('/admin');
       }
     },[navigate]);
 
@@ -45,12 +45,12 @@ import { userLogin } from "../../features/axios/api/user/userAuthentication";
         userLogin(formData)
         .then((response)=>{
           const token =response.token
-          dispatch(setToken());
+          dispatch(setToken(token));
           dispatch(loginSuccess())
 
           notify("Login success", "success");
           setTimeout(() => {
-            navigate('/user/home');
+            navigate('/admin');
           }, 2000);
         })
         .catch((error) => {

@@ -47,7 +47,7 @@ const AdminHomePageComponent= ()=>{
                 <Link to="" className="flex ml-2 md:mr-24">
                 <img src="" className="h-8 mr-3" alt="logo" />
                   <span className="self-center text-xl font-serif sm:text-2xl whitespace-nowrap dark:text-white">
-                    Found<span className="text-sky-600">it</span>
+                    <span className="text-sky-600"></span>
                   </span>
                 </Link>
               </div>
@@ -106,7 +106,7 @@ const AdminHomePageComponent= ()=>{
         >
           <div className="h-full px-3 pb-4 overflow-y-auto bg-white shadow-xl rounded-lg  dark:bg-gray-800">
             <ul className="space-y-2 font-medium">
-              <li>
+              {/* <li>
                 <Link
                   to="/admin"
                   className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:shadow-xl dark:hover:bg-gray-700"
@@ -123,7 +123,7 @@ const AdminHomePageComponent= ()=>{
                   </svg>
                   <span className="ml-3">Dashboard</span>
                 </Link>
-              </li>
+              </li> */}
   
               <li>
                 <Link
@@ -168,7 +168,7 @@ const AdminHomePageComponent= ()=>{
                   <span className="flex-1 ml-3 whitespace-nowrap">Companies</span>
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   to="/admin/admin-verification"
                   className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:shadow-xl dark:hover:bg-gray-700"
@@ -190,7 +190,7 @@ const AdminHomePageComponent= ()=>{
                     Employer Verification
                   </span>
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         </aside>
