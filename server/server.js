@@ -12,6 +12,7 @@ const errorHandler = require("./utils/middleware/errorHandlng")
 //requiring routes
 const userRoute = require("./routes/userRoutes");
 const companyRoute = require("./routes/companyRoute")
+const adminRoute = require("./routes/adminRoute")
 
 const AppError = require("./utils/error-class/AppError");
 const HttpStatusCodes = require("./utils/httpStatusCodes");
@@ -32,7 +33,11 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({extended: true}));
 
 
+//admin route
+app.use("/api/v1/admin", adminRoute)
+//user route
 app.use("/api/v1/auth", userRoute);
+//company route
 app.use("/api/v1/company", companyRoute)
 
 

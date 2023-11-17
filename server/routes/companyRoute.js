@@ -7,12 +7,16 @@ const {
   handleAddCompany,
   handleUpdateCompany,
 } = require("../controllers/company-controller/companyController");
+const {
+  handleAdminVerify
+} = require("../utils/middleware/adminVerify")
 
 router.route("/")
     .get(handleGetCompanies)
     .post(handleAddCompany)
     .put(handleUpdateCompany)
     .patch(handleSoftDeleteCompany)
-    .delete(handleCompleteDelete);
+    .delete(handleAdminVerify, handleCompleteDelete);
+
 
 module.exports = router;

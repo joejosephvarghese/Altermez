@@ -61,10 +61,11 @@ const handleUserLogin = asyncHandler(async (req, res, next) => {
   }
 
  const isCorrect = await bcrypt.compare(password, user.password);
- console.log(isCorrect)
+ console.log(isCorrect,"got")
  if(isCorrect){
    const payload = {id: user._id}
    const token = jwt.sign(payload, Configs.JWT_SECRET);
+   
    return res.status(HttpStatusCodes.OK).json({status: "success", message:"User has been verified", token})
  }
  const err = new AppError("Invalid Credentials", HttpStatusCodes.UNAUTHORIZED);
@@ -81,7 +82,7 @@ const handleVerifyUser = asyncHandler(async (req, res, next) => {
         next(err)
       }
     });
-    console.log(isVerify)
+    console.log(isVerify,"lklklklklklklklklk")
   }
 });
 
