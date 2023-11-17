@@ -149,7 +149,7 @@ const AdminHomePageComponent= ()=>{
   
               <li>
                 <Link
-                  to="/admin/employers"
+                  to=""
                   className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:shadow-xl dark:hover:bg-gray-700"
                 >
                   <svg
@@ -195,7 +195,7 @@ const AdminHomePageComponent= ()=>{
           </div>
         </aside>
         <div>
-          aslkdjfaksdf
+          
         </div>
       </>
     )

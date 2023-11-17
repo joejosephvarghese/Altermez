@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { Card, Typography } from "@material-tailwind/react";
-
 import { useDispatch, useSelector } from "react-redux";
+import { Card, Typography } from "@material-tailwind/react";
 import { handleFetchingCompanies } from "../../features/redux/slice/admin/companySlice";
-
-// const TABLE_HEAD = ["Name", "Job", "Employed", ""];
 
 const ListCompaniTable = () => {
   const dispatch = useDispatch();
@@ -21,7 +18,7 @@ const ListCompaniTable = () => {
   };
 
   React.useEffect(() => {
-    dispatch(handleFetchingCompanies({ page, limit: totalItems }));
+    dispatch(handleFetchingCompanies({ page, limit: itemsPerPage }));
   }, [page]);
 
   const renderPaginationButtons = () => {
@@ -29,9 +26,7 @@ const ListCompaniTable = () => {
       <div className="flex">
         <button
           className={`mx-2 px-4 py-2 border rounded ${
-            page === 1
-              ? "bg-gray-300 cursor-not-allowed"
-              : "bg-blue-500 text-white"
+            page === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 text-white"
           }`}
           onClick={() => handlePageChange(page - 1)}
           disabled={page === 1}
@@ -40,9 +35,7 @@ const ListCompaniTable = () => {
         </button>
         <button
           className={`mx-2 px-4 py-2 border rounded ${
-            page === totalPages
-              ? "bg-gray-300 cursor-not-allowed"
-              : "bg-blue-500 text-white"
+            page === totalPages ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 text-white"
           }`}
           onClick={() => handlePageChange(page + 1)}
           disabled={page === totalPages}
@@ -53,8 +46,23 @@ const ListCompaniTable = () => {
     );
   };
 
+  const handleAddCompany = () => {
+    // Add logic to show a modal or navigate to the page with the form for adding a new company
+    console.log("Add Company clicked!");
+  };
+
   return (
     <div className="container mx-auto mt-8">
+      <div className="flex justify-between mb-4">
+        {/* <h1 className="text-2xl font-bold">Company List</h1> */}
+        <button
+          className="bg-green-500 text-white px-4 py-2 rounded "
+          onClick={handleAddCompany}
+        >
+          Add Company
+        </button>
+      </div>
+
       <table className="min-w-full bg-white border border-gray-300">
         <thead>
           <tr>
@@ -67,30 +75,26 @@ const ListCompaniTable = () => {
           </tr>
         </thead>
         <tbody>
-          {companies.map((company) => {
-            return (
-              <tr>
-                <td className="py-2 px-4 border-b border-r">{company?.name}</td>
-                <td className="py-2 px-4 border-b border-r">Jane Doe</td>
-                <td className="py-2 px-4 border-b border-r">30</td>
-                <td className="py-2 px-4 border-b border-r">
-                  jane@example.com
-                </td>
-                <td className="py-2 px-4 border-b border-r">987-654-3210</td>
-                <td className="py-2 px-4 border-b text-center">
-                  <button className="bg-blue-500 text-white px-2 py-1 mr-2">
-                    Edit
-                  </button>
-                  <button className="bg-red-500 text-white px-2 py-1 mr-2">
-                    Delete
-                  </button>
-                  <button className="bg-green-500 text-white px-2 py-1">
-                    View
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+          {companies.map((company) => (
+            <tr key={company.id}>
+              <td className="py-2 px-4 border-b border-r">{company?.name}</td>
+              <td className="py-2 px-4 border-b border-r">{company?.email}</td>
+              <td className="py-2 px-4 border-b border-r">{company?.userLimit}</td>
+              <td className="py-2 px-4 border-b border-r">{company?.country}</td>
+              <td className="py-2 px-4 border-b border-r">{company?.phone}</td>
+              <td className="py-2 px-4 border-b text-center">
+                <button className="bg-blue-500 text-white px-2 py-1 mr-2">
+                  Edit
+                </button>
+                <button className="bg-red-500 text-white px-2 py-1 mr-2">
+                  Delete
+                </button>
+                <button className="bg-green-500 text-white px-2 py-1">
+                  View
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
 

@@ -43,7 +43,7 @@ const companySlice = createSlice({
             })
             .addCase(handleFetchingCompanies.fulfilled, (state, action) =>{
                 state.loading = false;
-                state.data = action.payload;
+                state.data = action.payload.companies ?? [];
             })
             .addCase(handleFetchingCompanies.rejected, (state, action) =>{
                 state.loading = false;
