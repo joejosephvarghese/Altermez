@@ -195,7 +195,7 @@ const AdminHomePageComponent= ()=>{
           </div>
         </aside>
         <div>
-          <Outlet/>
+          aslkdjfaksdf
         </div>
       </>
     )

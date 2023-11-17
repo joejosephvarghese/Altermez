@@ -6,6 +6,7 @@ const ListCompaniPage=()=>{
 
     return(
         <div>
+            askljfdkljf
             <ListCompaniTable/>
         </div>
     )

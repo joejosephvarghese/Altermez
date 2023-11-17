@@ -1,13 +1,10 @@
 import React from "react";
 
-const ListCompaniTable=()=>{
-    return(
-
-        <div>
-
-
-        </div>
-    )
-}
-
-export default ListCompaniTable
+const ListCompaniTable = () => {
+  return(
+    <div>
+        adfkjlasffdk
+    </div>
+  )
+};
+export default ListCompaniTable;
