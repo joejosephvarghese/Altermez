@@ -5,6 +5,17 @@ const HttpStatusCode = require("../../utils/httpStatusCodes");
 
 
 const handleGetCompanies = asyncHandler(async (req, res, next) =>{
+  try {
+    const companies = await Company.find(); 
+    return res.status(HttpStatusCode.OK).json({
+      status: "success",
+      message: "Companies retrieved successfully",
+      companies,
+    });
+  } catch (error) {
+    console.log(error);
+    return next(error);
+  }
 
 })
 
