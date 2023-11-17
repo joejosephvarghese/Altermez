@@ -21,3 +21,22 @@ export const adminLogin = async (payload)=>{
    }
     }
    };
+
+  //  export const getAllCompanies= async()=>{
+  //      try {
+  //       const config={
+  //         url:`${apiConfig.getAllCompanies}`,
+  //         method:"get",
+  //         data:payload
+  //       };
+  //       const response= await axios(config);
+  //       return response.data;
+        
+  //      } catch (error) {
+  //       if (error.message === "Request failed with status code 401") {
+  //         throw new Error("Incorrect email or password !!!");
+  //      }else {
+  //       throw new Error("Login failed, try again");
+  //     }
+  //   }
+  //  }

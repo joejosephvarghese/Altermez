@@ -43,7 +43,7 @@ const AdminLoginForm = () => {
   const onSubmit = (data) => {
   console.log(data);
 
-  adminLogin(data) .then((response)=>{
+  adminLogin(data).then((response)=>{
     const token =response.token
     dispatch(adminsetToken(token));
     dispatch(loginSuccess())

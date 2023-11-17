@@ -25,7 +25,7 @@ const loadTokenFromLocalStorage=()=>{
         adminsetToken: (state, action) => {
             state.token = action.payload;
             try {
-              localStorage.setItem('token', action.payload);
+              localStorage.setItem('adminAuth', action.payload);
             } catch (error) {
               console.log('Error storing token in local storage:', error);
             }
@@ -33,7 +33,7 @@ const loadTokenFromLocalStorage=()=>{
           adminclearToken: (state) => {
             state.token = null;
             try {
-              localStorage.removeItem('token');
+              localStorage.removeItem('adminAuth');
             } catch (error) {
               console.log('Error removing token from local storage:', error);
             }
