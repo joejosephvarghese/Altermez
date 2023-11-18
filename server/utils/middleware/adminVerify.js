@@ -7,6 +7,9 @@ const Configs = require("../constants");
 const handleAdminVerify = asyncHandler(async (req, res, next) =>{
     try {
         const token = req.headers["authorization"].split("Bearer ")[1];
+        console.log('====================================');
+        console.log(token);
+        console.log('====================================');
         jwt.verify(token, Configs.JWT_SECRET, (err, decoded) =>{
             if(err){
                 const error = new AppError(err.message, HttpStatusCodes.UNAUTHORIZED);

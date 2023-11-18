@@ -4,6 +4,7 @@ import userLoginAuthReducer from '../slice/user/UserLoginAuthSlice';
 import adminLoginAuthReducer from '../slice/admin/AdminLoginAuthSlice';
 import companyReduer from '../slice/admin/companySlice';
 import admintokenReducer from '../slice/admin/AdminTokenSlice';
+import userSlice from '../slice/admin/userSlice';
 
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     adminAuth: adminLoginAuthReducer,
     companies: companyReduer,
     adminToken: admintokenReducer,
+    user: userSlice,
   });
 
 

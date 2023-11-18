@@ -1,9 +1,10 @@
-import axios, { AxiosRequestConfig } from "axios";
-
+import axios from "axios";
 import apiConfig from "../../../utils/apiConfig";
 
+
+
 axios.interceptors.request.use((request) =>{
-    const token = localStorage.getItem("token") ?? null;
+    const token = localStorage.getItem("adminToken") ?? null;
     console.log(token, "in jog delete");
     if(token){
         request.headers["Authorization"] = `Bearer ${token}`;
@@ -12,23 +13,22 @@ axios.interceptors.request.use((request) =>{
 })
 
 
-export const jobPost = async (payload) => {
+
+export const deleteJob = async (payload) => {
+    
     try {
         const config = {
-            url: `${apiConfig.jobPost}`,
-            method: "post",
-            data: payload
+            url: `${apiConfig.jobDelete}?companyId=${payload}`,
+            method: "delete",
+          
         };
         const response = await axios(config);  // Use axios to make the request
         return response.data;
     } catch (error) {
         if (error.response && error.response.status === 409) {
-            throw new Error("Job post failed: Conflict - Job already exists!");
+            throw new Error("company delete failed: Conflict - !");
         } else {
-            throw new Error("Job post failed, please try again");
+            throw new Error("company delete failed, please try again");
         }
     }
 };
-
-
-

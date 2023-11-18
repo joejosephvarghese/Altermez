@@ -12,7 +12,8 @@ const apiConfig={
 
 
     //company
-    jobPost:`${configKeys.API_URL}/company`
+    jobPost:`${configKeys.API_URL}/company`,
+    jobDelete:`${configKeys.API_URL}/company`
   }
 
 

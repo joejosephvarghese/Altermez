@@ -34,7 +34,7 @@ const loadTokenFromLocalStorage=()=>{
           adminclearToken: (state) => {
             state.token = null;
             try {
-              localStorage.removeItem('adminAuth');
+              localStorage.removeItem('adminToken');
             } catch (error) {
               console.log('Error removing token from local storage:', error);
             }

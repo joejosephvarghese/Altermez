@@ -13,8 +13,12 @@ const handleGetCompanies = asyncHandler(async (req, res, next) => {
     const totalCompanies = Company.countDocuments();
     const totalPage = Math.ceil(totalCompanies / limit);
     const companies = await Company.find()
+ 
       .skip((page - 1) * limit)
       .limit(limit);
+         console.log('====================================');
+    console.log(companies);
+    console.log('====================================');
     return res.status(HttpStatusCode.OK).json({
       status: "success",
       message: "Companies retrieved successfully",

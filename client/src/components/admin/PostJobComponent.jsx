@@ -18,7 +18,7 @@ const CompanyForm = () => {
     jobPost(data).then((response)=>{
    console.log(response);
    setTimeout(() => {
-    navigate('/admin/companies');
+    navigate('/company');
   }, 2000);
 
   notify("Company Posted", "success");
@@ -29,9 +29,9 @@ const CompanyForm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
+    <div className="w-[40rem] h-[28rem] mx-auto p-6 bg-white rounded-md shadow-md">
       <h2 className="text-2xl font-bold mb-4">Add Company Details</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         <Input
           type="text"
           label="Company Name"
@@ -45,7 +45,7 @@ const CompanyForm = () => {
         <Input
           type="number"
           label="User Limit"
-          {...register("userLimit", { required: true })}
+          {...register("user", { required: true })}
         />
         <Input
           type="text"
@@ -53,7 +53,7 @@ const CompanyForm = () => {
           {...register("country", { required: true })}
         />
         <Input
-          type="tel"
+          type="number"
           label="Phone"
           {...register("phone", { required: true })}
         />

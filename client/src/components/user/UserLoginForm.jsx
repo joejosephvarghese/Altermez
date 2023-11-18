@@ -33,8 +33,7 @@ import { userLogin } from "../../features/axios/api/user/userAuthentication";
       if(token) {
         dispatch(loginSuccess());
       }
-      if(isLoggedIn) {
-        console.log(isLoggedIn);
+      if(token) {
         navigate('/');
       }
     },[navigate]);
@@ -122,7 +121,7 @@ import { userLogin } from "../../features/axios/api/user/userAuthentication";
 
             <span className="text-gray-500">
               Don't have an account?{" "}
-              <p className="text-purple-600 underline">Sign up</p>
+              <Link to={"/signup"}><p className="text-purple-600 underline">Sign up</p></Link>
             </span>
          
         </div>

@@ -15,8 +15,8 @@ const Header = () => {
 
   const handleLogout = () =>{
     dispatch(logout());
-    setTimeout(() => navigate("login"), 2000);
     dispatch(adminclearToken());
+    setTimeout(() => navigate("login"), 2000);
   }
 
   return (

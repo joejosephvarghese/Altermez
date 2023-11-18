@@ -34,7 +34,11 @@ const initialState = {
 const companySlice = createSlice({
     name: "get-companies",
     initialState,
-    reducers:{},
+    reducers:{
+        removeCompany: (state, action) =>{
+            state.data = state.data.filter(company => action.payload !== company._id)
+        }
+    },
     extraReducers: (builder) =>{
         builder
             .addCase(handleFetchingCompanies.pending, (state) =>{
@@ -52,4 +56,6 @@ const companySlice = createSlice({
     }
 })
 
+
+export const {removeCompany} = companySlice.actions
 export default companySlice.reducer;

@@ -10,12 +10,10 @@ const Configs = require("../../utils/constants");
 
 const handleUserSignup = asyncHandler(async (req, res, next) => {
   // console.log(req.headers);
-  console.log(req.body,"odkdf");
+  console.log(req.body, "odkdf");
   const { name, email, password } = req.body;
 
- 
   if ((!name, !email, !password)) {
-  
     const error = new AppError(
       "Please enter the all the values",
       HttpStatusCodes.BAD_REQUEST
@@ -38,7 +36,7 @@ const handleUserSignup = asyncHandler(async (req, res, next) => {
     email,
     password,
   });
-console.log(newUser,"ff");
+  console.log(newUser, "ff");
   await newUser.save();
 
   res.status(HttpStatusCodes.SUCCESS).json({
@@ -50,45 +48,74 @@ console.log(newUser,"ff");
   });
 });
 
-
 const handleUserLogin = asyncHandler(async (req, res, next) => {
-  const {email, password} = req.body;
-  console.log(email, password )
-  const user = await User.findOne({email});
-  if(!user) {
-     const err = new AppError("Invalid Credentals", HttpStatusCodes.UNAUTHORIZED);
-     return next(err);
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    const err = new AppError(
+      "Invalid Credentals",
+      HttpStatusCodes.UNAUTHORIZED
+    );
+    return next(err);
   }
 
- const isCorrect = await bcrypt.compare(password, user.password);
- console.log(isCorrect,"got")
- if(isCorrect){
-   const payload = {id: user._id}
-   const token = jwt.sign(payload, Configs.JWT_SECRET);
-   
-   return res.status(HttpStatusCodes.OK).json({status: "success", message:"User has been verified", token})
- }
- const err = new AppError("Invalid Credentials", HttpStatusCodes.UNAUTHORIZED);
- return next(err);
+  const isCorrect = await bcrypt.compare(password, user.password);
+  if (isCorrect) {
+    const payload = {
+      id: user._id,
+      isAdmin: user.isAdmin,
+      name: user.name,
+      email: user.email,
+    };
+    const token = jwt.sign(payload, Configs.JWT_SECRET);
+
+    return res
+      .status(HttpStatusCodes.OK)
+      .json({ status: "success", message: "User has been verified", token });
+  }
+  const err = new AppError("Invalid Credentials", HttpStatusCodes.UNAUTHORIZED);
+  return next(err);
 });
 
 const handleVerifyUser = asyncHandler(async (req, res, next) => {
-  if(req.headers["authorization"]){
-    const token = req.headers["authorization"].split(" ")[1]
-    console.log(token)
+  if (req.headers["authorization"]) {
+    const token = req.headers["authorization"].split(" ")[1];
+    console.log(token);
     jwt.verify(token, Configs.JWT_SECRET, (error, decoded) => {
-      if(error){
-        const err = new AppError(error.message, HttpStatusCodes.UNAUTHORIZED)
-        next(err)
+      if (error) {
+        const err = new AppError(error.message, HttpStatusCodes.UNAUTHORIZED);
+        next(err);
+      }
+      if(decoded.isAdmin){
+        const err = new AppError("This user does not have the access", HttpStatusCodes.UNAUTHORIZED);
+        next(err);
       }
     });
-    console.log(isVerify,"lklklklklklklklklk")
+    next()
   }
 });
 
+const handleGetUsers = asyncHandler(async (req, res, next) => {
+  const { page, limit } = req.query;
+  let result = {};
+  try {
+    const documentCount = await User.countDocuments();
+    const pageCount =Math.ceil(documentCount/limit) ?? 0;
+    result.pages = pageCount
+    console.log(documentCount, pageCount);
+    const users = await User.find({})
+      .skip((page - 1) * limit)
+      .limit(limit);
+      result.users = users
+      res.status(HttpStatusCodes.OK).json({status: "success", message: "Fetching all users", data: result})
+  } catch (error) {
+    next(error)
+  }
+});
 
 module.exports = {
   handleUserSignup,
   handleUserLogin,
   handleVerifyUser,
+  handleGetUsers,
 };

@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleFetchingCompanies, removeCompany } from "../../features/redux/slice/admin/companySlice";
 import { Link } from "react-router-dom";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Toaster, toast } from "sonner";
 import { deleteJob } from "../../features/axios/company/jobDelete";
+import { Toaster, toast } from "sonner";
 
-const ListCompaniTable = () => {
+const CompaniTableComponet = () => {
   const dispatch = useDispatch();
   const navigate=useNavigate();
 
@@ -81,10 +81,10 @@ const ListCompaniTable = () => {
   };
 
   return (
-    <div className="container mx-auto mt-8">
-      <div className="flex justify-between mb-4">
+    <div className="container mx-auto mt-8 ">
+      <div className="flex justify-between mb-4 w-screen">
         {/* <h1 className="text-2xl font-bold">Company List</h1> */}
-        {/* <Link to={"/admin/postjob"}>
+        <Link to={"/add-company"}>
           <button
             type="button"
             className="inline-flex items-center rounded-md bg-brown-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-brown-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -92,7 +92,7 @@ const ListCompaniTable = () => {
             <PlusIcon className="-ml-0.5 mr-1.5 h-5 w-5" aria-hidden="true" />
             Post Job
           </button>
-        </Link> */}
+        </Link>
       </div>
 
       <table className="min-w-full bg-white border border-gray-300">
@@ -103,7 +103,7 @@ const ListCompaniTable = () => {
             <th className="py-2 px-4 border-b border-r">User Limit</th>
             <th className="py-2 px-4 border-b border-r">Country</th>
             <th className="py-2 px-4 border-b border-r">Phone</th>
-            <th className="py-2 px-4 border-b text-center">Actions</th>
+          
           </tr>
         </thead>
         <tbody>
@@ -119,7 +119,7 @@ const ListCompaniTable = () => {
               </td>
               <td className="py-2 px-4 border-b border-r">{company?.phone}</td>
               <td className="py-2 px-4 border-b text-center">
-                <button
+                {/* <button
                   className="bg-blue-500 text-white px-2 py-1 mr-2"
                   onClick={() => handleEdit(company?._id)}
                 >
@@ -130,7 +130,7 @@ const ListCompaniTable = () => {
                   onClick={() => handleDelete(company?._id)}
                 >
                   Delete
-                </button>
+                </button> */}
               </td>
             </tr>
           ))}
@@ -145,4 +145,4 @@ const ListCompaniTable = () => {
   );
 };
 
-export default ListCompaniTable;
+export default CompaniTableComponet;
