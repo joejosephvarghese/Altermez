@@ -1,78 +1,67 @@
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 import { Input, Button } from "@material-tailwind/react";
-
+import { jobPost } from "../../features/axios/company/jobPost";
+import { useNavigate } from "react-router-dom";
+import { Toaster, toast } from "sonner";
 const CompanyForm = () => {
-  const [companyData, setCompanyData] = useState({
-    name: "",
-    email: "",
-    userLimit: "",
-    country: "",
-    phone: "",
-  });
+  const { register, handleSubmit } = useForm();
+  const navigate=useNavigate();
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setCompanyData({ ...companyData, [name]: value });
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const notify = (msg, type) =>
+  type === "error" ? toast.error(msg) : toast.success(msg);
 
-    // Add logic to handle the submission of company data
-    console.log("Company data submitted:", companyData);
+  const onSubmit = (data) => {
+    console.log("Company data submitted:", data);
 
-    // You can add additional logic here, such as dispatching an action
-    // to update state or making an API request to save the company details.
+    jobPost(data).then((response)=>{
+   console.log(response);
+   setTimeout(() => {
+    navigate('/admin/companies');
+  }, 2000);
+
+  notify("Company Posted", "success");
+    })
+    .catch((error) => {
+      notify(error.message, "error");
+    });
   };
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
       <h2 className="text-2xl font-bold mb-4">Add Company Details</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           type="text"
-          name="name"
           label="Company Name"
-          value={companyData.name}
-          onChange={handleInputChange}
-          required
+          {...register("name", { required: true })}
         />
         <Input
           type="email"
-          name="email"
           label="Company Email"
-          value={companyData.email}
-          onChange={handleInputChange}
-          required
+          {...register("email", { required: true })}
         />
         <Input
           type="number"
-          name="userLimit"
           label="User Limit"
-          value={companyData.userLimit}
-          onChange={handleInputChange}
-          required
+          {...register("userLimit", { required: true })}
         />
         <Input
           type="text"
-          name="country"
           label="Country"
-          value={companyData.country}
-          onChange={handleInputChange}
-          required
+          {...register("country", { required: true })}
         />
         <Input
           type="tel"
-          name="phone"
           label="Phone"
-          value={companyData.phone}
-          onChange={handleInputChange}
-          required
+          {...register("phone", { required: true })}
         />
         <Button color="blue" type="submit" ripple="light">
           Submit
         </Button>
       </form>
+      <Toaster richColors />
     </div>
   );
 };

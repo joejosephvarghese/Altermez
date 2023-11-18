@@ -11,8 +11,8 @@ const ListCompaniTable = () => {
   
   
 
-  const itemsPerPage = 10; // Adjust as needed
-  const totalItems = 20; // Replace with the actual total number of items
+  const itemsPerPage = 10; 
+  const totalItems = 20; 
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -20,6 +20,16 @@ const ListCompaniTable = () => {
     setPage(page);
   };
 
+
+  const handleEdit = (companyId) => {
+   
+    console.log(`Edit company with ID: ${companyId}`);
+  };
+
+  const handleDelete = (companyId) => {
+   
+    console.log(`Delete company with ID: ${companyId}`);
+  };
 
  
 
@@ -93,15 +103,19 @@ const ListCompaniTable = () => {
               <td className="py-2 px-4 border-b border-r">{company?.country}</td>
               <td className="py-2 px-4 border-b border-r">{company?.phone}</td>
               <td className="py-2 px-4 border-b text-center">
-                <button className="bg-blue-500 text-white px-2 py-1 mr-2">
+              <button
+                  className="bg-blue-500 text-white px-2 py-1 mr-2"
+                  onClick={() => handleEdit(company.id)}
+                >
                   Edit
                 </button>
-                <button className="bg-red-500 text-white px-2 py-1 mr-2">
+                <button
+                  className="bg-red-500 text-white px-2 py-1 mr-2"
+                  onClick={() => handleDelete(company.id)}
+                >
                   Delete
                 </button>
-                <button className="bg-green-500 text-white px-2 py-1">
-                  View
-                </button>
+             
               </td>
             </tr>
           ))}

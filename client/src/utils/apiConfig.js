@@ -8,8 +8,12 @@ const apiConfig={
 
   // adimin apiConfig
     adminLogin:`${configKeys.API_URL}/admin/login`,
-    getAllCompanies:`${configKeys.API_URL}/admin`
-}
+    getAllCompanies:`${configKeys.API_URL}/admin`,
+
+
+    //company
+    jobPost:`${configKeys.API_URL}/company`
+  }
 
 
 export default apiConfig;
